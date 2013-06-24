@@ -1,0 +1,11 @@
+; Key Translation Table for NPS WPS Enhancer
+
+c+8 startrecord
+c+9 endrecord
+c+0 playback
+c+m c-newline
+c+h c-backspace
+c+[ c-esc
+
+; for version 1.82
+c+7 cmd start npswps

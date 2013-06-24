@@ -1,0 +1,21 @@
+Frequently asked requests for NPS WPS Enhancer are listed below.
+
+I don't guarantee that a later version of NPS WPS Enhancer will have all or
+some of these features.
+
+ 1. Enable dragging files from not only standard file dialogs
+    but any file dialogs as well
+ 2. Colored window shadows
+ 3. Window shadows on not only Desktop, but also any window which lies
+    under the window
+ 4. Allow the user to customize minimize/maximize/hide buttons
+ 5. "Open Parent" button for folders
+ 6. Move icons to the nearest grid
+    (Now you can only arrange all icons like a matrix)
+ 7. Move close button to the left side of title bar
+ 8. Hide mouse pointer after several seconds when mouse pointer is not moved
+ 9. Remove the confirmation message box when you want to close a command
+    window immediately
+10. Waiting time for "Automatic Menu Selection"
+11. Online help
+

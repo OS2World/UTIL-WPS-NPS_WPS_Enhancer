@@ -1,0 +1,264 @@
+        NPS WPS Enhancer version 1.81 Window Animation Manual
+
+
+[Outline]
+
+  NPS WPS Enhancer loads DLLs written in NPSWPS.LST for window animations
+when it starts.  So programmers who can write a DLL can add their own
+window animation DLL.  This document shows how to create window animations.
+
+
+[Definitions of function and structure]
+
+  Please see NPSWPSWA.H first.  This file contains the necessary
+definitions to create window animations.  Window animation functions must
+be declared like this:
+
+  BOOL EXPENTRY windowAnimation(struct AnimationData *pAnimationData);
+
+
+  "AnimationData" is the structure used for window animation functions.
+This structure contains these variables listed below.
+
+HPS hps;
+  The presentation space handle of the entire screen.
+
+HWND hwnd;
+  The window handle of the opening window.  If the animation function is
+called for the closing window,  this variable is set to NULLHANDLE.
+  The opening window is prohibited from drawing its window by
+WinLockWindowUpdate.
+
+RECTL rectWindow;
+  The rectangle data which stands for the position and the size of the
+window in the screen coordinates.
+
+POINTL ptCenter;
+  The position of the window center.  This data is calculated as follows:
+ptCenter.x = (rectWindow.xLeft + rectWindow.xRight) / 2,
+ptCenter.y = (rectWindow.yBottom + rectWindow.yTop) / 2.
+
+POINTL ptRelRightTop;
+  The position of the right top corner of the window in the window
+coordinates.
+ptRelRightTop.x = rectWindow.xRight - ptCenter.x,
+ptRelRightTop.y = rectWindow.yTop - ptCenter.y.
+
+BOOL fOpen;
+  TRUE if the animation function is called for the opening window, FALSE
+for the closing window.
+
+enum AnimationCallType animCallType;
+  What the animation function is called for.  This variable is set to
+"AnimationInitialize" to initialize the function for one opening or
+closing animation, "AnimationDraw" to draw the picture, "AnimationErase"
+to erase the picture, and "AnimationTerminate" to terminate the animation.
+
+LONG lStep;
+  The current step of the animation.  This value ranges 1 to cTotalSteps
+(see below).
+
+LONG cTotalSteps;
+  The total steps of each animation type.  The user can change this value
+with the animation dialog box.
+
+LONG cAfterimages;
+  The number of afterimages.  The user can change this value with the
+notebook.
+
+LONG lParameter;
+  The parameter for each animation function.  For instance, this value
+means the rotation angle for Spin Frame, and means frame divisor for
+Scatter / Gather Frames.  The user can change this value with the dialog
+box, too.
+
+LONG lVersion;
+  NPS WPS Enhancer's version. This value is calculated as follows:
+lVersion = MajorVersion x 1000 + MinorVersion x 10 + Revision
+For example, NPS WPS Enhancer version 1.81 sets this value to 1810, and
+version 2.71a will set this value to 2711, etc.
+  This variable is available with NPS WPS Enhancer version 1.81 or later.
+
+RECTL rectScreen;
+  The rectangle data which stands for the size of the entire screen.
+The values rectScreen.xLeft and rectScreen.yBottom are always set to 0.
+  This variable is available with NPS WPS Enhancer version 1.81 or later.
+
+LONG alReserved[27];
+  Do not use this. It is reserved for future versions.
+
+CHAR achBuffer[4000];
+  The free data area for the window animation.  You can store data
+necessary to draw a window animation.
+
+
+[How animation functions are called]
+
+  The function to draw the animation is randomly selected every time a
+window is opening or closing, from the enabled animation functions.
+
+  When NPS WPS Enhancer intercepts the message which says a window is now
+opening or closing,  the program gets the HPS of the screen and sets its
+foreground mix mode to FM_INVERT.
+  After AnimationData is properly set, the animation function is called
+with the call type (animCallType) of AnimationInitialize.  The animation
+function has to initialize itself for the animation of this window, and
+return BOOL.
+  The function stores the animation data to achBuffer if necessary.
+  If FALSE is returned, NPS WPS Enhancer tries to initialize another
+animation function. If it fails to initialize three times in a row, the
+window animation doesn't occur for this window at all.
+  If TRUE is returned, the animation begins.
+
+  The animation function is called twice for each step; once to draw the
+picture, once to erase it.  The pointer to AnimationData points the same
+data used in the initialization call.
+
+  When opening, the step (lStep) is incremented from 1 to the total steps
+(cTotalSteps). When closing, the step is decremented from the total steps
+to 1. The function call to erase the picture is delayed from the call to
+draw according to the setting of the number of afterimages.
+
+  For example, the parameters for the opening animations are shown below
+where the total step is set to 100, and the number of afterimages is set
+to 1.
+
+  Order     Step    Calling Type (animCallType)
+    1         1       draw    (afterimage: 1)
+    2         1       erase
+    3         2       draw
+    4         2       erase
+    5         3       draw
+    6         3       erase
+    7         4       draw
+    8         4       erase
+
+   ...
+
+  197        99       draw
+  198        99       erase
+  199       100       draw
+  200       100       erase   (afterimage: 0)
+
+  If the number of afterimages is set to 3 in this case, these parameters
+are set as follows.
+
+  Order     Step    Calling Type
+    1         1       draw    (afterimage: 1)
+    2         2       draw    (afterimage: 2)
+    3         3       draw    (afterimage: 3)
+    4         1       erase
+    5         4       draw
+    6         2       erase
+    7         5       draw
+    8         3       erase
+
+   ...
+
+  193        98       draw
+  194        96       erase
+  195        99       draw
+  196        97       erase
+  197       100       draw
+  198        98       erase   (afterimage: 2)
+  199        99       erase   (afterimage: 1)
+  200       100       erase   (afterimage: 0)
+
+  The parameters for the closing animations are shown below where
+the total step is set to 100, and the number of afterimages is set to 1.
+
+  Order     Step    Calling Type
+    1       100       draw    (afterimage: 1)
+    2       100       erase
+    3        99       draw
+    4        99       erase
+    5        98       draw
+    6        98       erase
+    7        97       draw
+    8        97       erase
+
+   ...
+
+  197         2       draw
+  198         2       erase
+  199         1       draw
+  200         1       erase   (afterimage: 0)
+
+  If the number of afterimages is set to 3 in this case, these parameters
+are set as follows.
+
+  Order     Step    Calling Type
+    1       100       draw    (afterimage: 1)
+    2        99       draw    (afterimage: 2)
+    3        98       draw    (afterimage: 3)
+    4       100       erase
+    5        97       draw
+    6        99       erase
+    7        96       draw
+    8        98       erase
+
+   ...
+
+  193         3       draw
+  194         5       erase
+  195         2       draw
+  196         4       erase
+  197         1       draw
+  198         3       erase   (afterimage: 2)
+  199         2       erase   (afterimage: 1)
+  200         1       erase   (afterimage: 0)
+
+
+  If you think it's too complex (I think so!), just ignore whether opening
+or closing, whether drawing or erasing, and the number of afterimages.
+Draw the same picture for the same step count instead.  Because the
+animation function is always called twice for the same step, and the mix
+mode is set to INVERT, this way of drawing guarantees that the picture is
+always properly erased. And it also guarantees the movement of closing
+animation is exactly the reverse of one of opening animation.  I used this
+way in all animation functions in NPSWPSWA.CPP.
+
+  Animation functions have to return TRUE if they want to continue
+animation for further step.  If FALSE is returned, the animation is
+aborted immediately.
+
+  After drawing and erasing the animation, the animation function is
+called again with call type of "AnimationTerminate".  In this termination
+call you can clean up resources if necessary.  This termination is always
+called if the initialization is successfully returned. (Even if the
+animation is aborted.)
+
+  I didn't use the termination call in NPSWPSWA.CPP, and just returns TRUE.
+
+
+[How to register window animation functions]
+
+  First, animation functions must be exported in a DLL, not by their names
+but by their DLL ordinals.  See NPSWPSWA.DEF for a sample.
+
+  The format of NPSWPS.LST is described below. Each string is separated by
+a space.
+
+DLL-Name DLL-Ordinal "Animation Name" "Parameter Name" "Displayed Animation Name" "Displayed Parameter Name" Default-Step Default-Parameter Minimum-Parameter Maximum-Parameter
+
+  Lines which start with a semicolon are ignored.  "Animation name" and
+"Parameter Name" must be English for worldwide compatibility.
+To avoid conflict of animation names, please included the author's name in
+the animation name if possible. For example, "Takasugi's Spin Frame", etc.
+  "Displayed Animation Name" and "Displayed Parameter Name" are used for
+the strings in the animation dialog box.  The user can modify these
+strings.
+
+  Default-Step and Default-Parameter are used for the settings the first
+time the DLL is loaded.  Once loaded, NPS WPS Enhancer will store the
+animation settings in NPSWPS.INI.
+
+
+[Other]
+
+  If you have something to ask about window animations, please send me an
+email.  I'm looking forward to seeing your nice animations.
+
+
+                        TAKASUGI 'N.P.S.' Shinji     Team OS/2 Japan
+                        ts@airnet.or.jp, jbd03575@niftyserve.or.jp

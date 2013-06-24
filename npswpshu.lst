@@ -1,0 +1,15 @@
+;DLL Neve DLL sorsz ma "Anim ci¢ neve" "Param‚ter neve" "Megjelen¡tett anim ci¢n‚v" "Megjelen¡tett param‚tern‚v" Alap‚rtelmezett l‚p‚sk”z Alap‚rtelmezett param‚ter‚rt‚k Legkisebb ‚rt‚k Legnagyobb ‚rt‚k
+
+;Az "Anim ci¢ neve" ‚s "Param‚ter neve" a nemzetk”zi kompatibilit s miatt
+;angolul marad.
+
+;A felhaszn l¢ m¢dos¡thatja a "Megjelen¡tett anim ci¢n‚v" ‚s a "Megjelen¡tett param‚tern‚v"
+;mez‹k ‚rt‚k‚t.
+
+
+npswpswa.dll 1 "Spin Frame" "Angle" "Forg¢ keret" "Sz”g (fok):" 400 -200 -999 999
+npswpswa.dll 2 "Vortex Frames" "Angle" "™rv‚nyl‹ keretek" "Sz”g (fok):" 170 200 -999 999
+npswpswa.dll 3 "Scatter / Gather Frames" "Divisor" "Sz‚tsz¢r¢d¢ / ”sszegyûl‹ keretek" "Oszt sok sz ma:" 40 4 1 10
+npswpswa.dll 4 "Spike Frames" "Angle" "Tske keretek" "Sz”g (fok):" 60 360 -999 999
+npswpswa.dll 5 "Fireworks Frames" "Angle" "Tzij t‚k keretek" "Sz”g (fok):" 80 300 -999 999
+

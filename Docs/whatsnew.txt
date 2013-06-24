@@ -1,0 +1,11 @@
+- New features of the version 1.82 -
+
+1. Bug fix in "Ignore Desktop".
+2. "Activate Window" now ignores PMX windows.
+3. You can use mouse button 1 to raise the window
+   except for WIN-OS2 windows when "Change Window Z-Order" is on.
+   WIN-OS2 windows are ignored to avoid strange behavior.
+4. "Ignore Buttonless Dialogs" now exactly ignores buttonless dialogs.
+   Previous version ignored all buttonless windows, including folders.
+5. Command line options -p and -q are added.
+6. Hot key for command execution.

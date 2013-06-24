@@ -1,0 +1,12 @@
+;DLL名 DLL序数 "アニメーション名" "パラメータ名" "表示されるアニメーション名" "表示されるパラメータ名" ステップ初期値 パラメータ初期値 パラメータ最小値 パラメータ最大値
+
+;"アニメーション名" と "パラメータ名" は英語にしてください。
+
+;"表示されるアニメーション名" と "表示されるパラメータ名" はユーザが
+;変更可能です。
+
+npswpswa.dll 1 "Spin Frame" "Angle" "スピンフレーム" "回転(度):" 400 -200 -999 999
+npswpswa.dll 2 "Vortex Frames" "Angle" "渦巻フレーム" "回転(度):" 170 200 -999 999
+npswpswa.dll 3 "Scatter / Gather Frames" "Divisor" "離散／集合フレーム" "分割数:" 40 4 1 10
+npswpswa.dll 4 "Spike Frames" "Angle" "スパイクフレーム" "回転(度):" 60 360 -999 999
+npswpswa.dll 5 "Fireworks Frames" "Angle" "花火フレーム" "回転(度):" 80 300 -999 999

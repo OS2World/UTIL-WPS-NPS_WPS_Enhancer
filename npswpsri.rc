@@ -1,0 +1,7 @@
+// ICON n PRELOAD IMPURE "filename"
+// n = 2, 3, 4, ...
+
+ICON 2 PRELOAD IMPURE "marble.ico"
+ICON 3 PRELOAD IMPURE "jade.ico"
+ICON 4 PRELOAD IMPURE "sky.ico"
+ICON 5 PRELOAD IMPURE "coral.ico"

@@ -1,0 +1,722 @@
+                NPS WPS Enhancer version 1.82 Manual
+
+
+[Outline]
+
+  NPS WPS Enhancer improves usability and customizability of OS/2,
+version 2.1 or later.  Since this software is freeware, there is no
+warranty.
+
+  With NPS WPS Enhancer installed on your desktop, you can...
+
+ 1. sort objects in a folder by file extensions.
+ 2. move folder windows or the system clock window by dragging with
+    mouse button 2.
+ 3. remove the menu items "Sort" and "Arrange" from the desktop popup
+    menu.
+ 4. use the popup menu on OS/2 or DOS command windows, and open files
+    or copy filenames from a file dialog in OS/2 windows.
+ 5. show the Window List by clicking both buttons in almost all
+    windows.
+ 6. select objects in a folder by their names.  (wildcards available)
+ 7. remap keys in PM windows or OS/2 command windows.  (temporary macro
+    available)
+ 8. move a window by dragging its frame with mouse button 2.
+ 9. make the mouse pointer "wrap" at the edge of the screen.
+10. draw lines on the screen.
+11. arrange objects in a folder in a matrix.
+12. automatically move the mouse pointer to the focused window.
+13. decorate the desktop with window shadows.
+14. add a "close" button to windows.
+15. automatically activate the window under the mouse pointer.
+    (optionally leave Z-order the same)
+16. change z-order of folders when you drag objects.
+17. use "full window" window drag instead of frame drag.
+18. mark and copy command window text with the mouse.
+19. paste the clipboard text to command windows with the mouse.
+20. drag files which are listed in the list box of a file dialog.
+21. change an icon for standard files.  (not available on Warp)
+22. enjoy new window open/close animations.
+23. scroll folder windows smoothly with their scroll bars.
+24. automatically select the menu item under the mouse pointer.
+25. change window z-order without changing the focus.
+26. use the popup menu on the Entry Fields to copy, cut, and paste.
+
+  Each function can be individually enabled, so you can use only the
+functions you want to.
+
+  NPS WPS Enhancer hides its window when it starts.  Use the Window
+List to bring up its settings notebook.
+
+
+
+[Installation]
+
+  Copy all files to the directory where you wish to keep NPS WPS
+Enhancer. All files in the archive must be kept in the same directory.
+Then, run NPSWPSIN.CMD to install NPS WPS Enhancer into the Startup
+folder. The LIBPATH statement in your CONFIG.SYS must also contain a "."
+path, the current directory.  NPS WPS Enhancer will not modify
+CONFIG.SYS or OS2.INI.
+
+  If you wish to use the Japanese version, please type the following
+commands from an OS/2 command prompt:
+
+  rc npswpsjp.rc npswps.dll
+  copy npswpsjp.lst npswps.lst
+
+  Danish, Dutch, French, German, Italian, Magyar, Polish, Spanish, and
+Swedish resource files are also available.  Type the previous commands
+with appropriate file names instead of NPSWPSJP.RC and NPSWPSJP.LST.
+
+Czech:     NPSWPSCZ.RC and NPSWPSCZ.LST
+Danish:    NPSWPSDK.RC and NPSWPSDK.LST
+Dutch:     NPSWPSNL.RC and NPSWPSNL.LST
+Finnish:   NPSWPSFI.RC and NPSWPSFI.LST
+French:    NPSWPSFR.RC
+German:    NPSWPSDE.RC and NPSWPSDE.LST
+Hungarian: NPSWPSHU.RC and NPSWPSHU.LST
+Italian:   NPSWPSIT.RC
+Polish:    NPSWPSPL.RC
+Russian:   NPSWPSRU.RC and NPSWPSRU.LST
+Spanish:   NPSWPSCL.RC
+Swedish:   NPSWPSSE.RC
+
+  NPSWPS.LST has not been translated yet for some languages.
+
+  You can delete NPSWPSJP.RC, NPSWPSJP.LST, or other foreign language
+files if you do not use them.
+
+  Once NPS WPS Enhancer has been installed it will start automatically
+when you boot OS/2.  If you do not wish it to do so you can move the
+NPS WPS Enhancer program object out of the Startup folder.
+
+  To uninstall NPS WPS Enhancer, delete all NPS WPS Enhancer files
+and delete its program object.
+
+
+
+[Command Line Parameters]
+
+  NPSWPS.EXE accepts the two parameters listed below. It will ignore
+any invalid parameter.
+
+-p: Set the INI file name.  You must specify the INI file name
+immediately after -p without a space.  For instance, if your OS2.INI
+is in C:\OS2, the parameter "-pc:\os2\os2.ini" forces NPSWPS.EXE to use
+OS2.INI.  If this parameter is not provided, NPSWPS.EXE uses NPSWPS.INI
+in its directory.
+
+-q: Disable sounds.  If your system has problems with the sounds use
+this option.
+
+
+
+[Feature Reference]
+
+[Select/Sort - Extension Sort]
+
+  This item adds "Extension" to the "Sort" submenu of the system menu
+or the popup menu of folders, allowing you to sort objects in the
+folder by their file extension.
+
+
+
+[Select/Sort - Selection by Object Name]
+
+  This feature allows you to select objects in a folder according to
+their name.  It adds a "Name..." item in the "Select" submenu of the
+system menu or popup menu of folders.
+  Case is ignored.  There are the following special characters.
+
+'*' matches any number of any character.
+'*.txt' matches 'a.txt', 'bc.txt', etc.
+
+'?' matches any single character except the period.
+'a.t?t' matches 'a.txt', but not 'a.tt' or 'a.t.t'.
+
+'!' means negation if it is the first character of the search string.
+So '!*.txt' will select the objects whose name does not match '*.txt'.
+
+',' is used to separate multiple keys.  Objects are selected if their
+names match any one of the multiple keys.
+
+'\' is the escape key - it nullifies the special effect of the next
+character.  But '\n' means a carriage return.
+
+Examples:
+
+*.txt     : Select the objects whose extension is 'txt'.
+!*\n*,a*  : Select the objects whose name does not contain a carriage
+            return, and the objects whose name starts with 'a'.
+
+
+
+[Select/Sort - Disable Sort and Arrange of Desktop]
+
+  When this is selected the "Sort" and "Arrange" menu items are
+removed from the desktop popup menu, preventing accidental
+rearrangement of your desktop.
+
+
+
+[Select/Sort - Arrange Icons on Matrix]
+
+  This setting arranges objects in a folder in a matrix, or grid.
+It will work only if the folder shows objects with normal icons, and
+if "Non-Grid" is selected for the View format in the settings
+notebook.
+
+  "x Origin" and "y Origin" indicate the coordinate of the first
+object, (0, 0) being the top-left of the folder.  "x Distance" and
+"y Distance" indicate the distance between objects.
+
+
+
+[Drag - Frame Drag]
+
+  This option allows you to drag a window by clicking and dragging
+on its frame (border) with mouse button 2.  Changing the size of the
+window is still done with button 1.  This function only works with
+PM windows.
+
+
+
+[Drag - Folder Drag]
+
+  This option allows you to move a folder by clicking and dragging
+it with mouse button 2 within the folder's empty space.
+
+
+
+[Drag - System Clock Drag]
+
+  This option allows you to move the system clock by dragging its
+window with mouse button 2.
+
+
+
+[Drag - Show Other Folders when Drag]
+
+  This option moves a folder with selected objects under any
+overlapping folders when the selected objects in that folder are
+dragged.  If the checkbox "Only when Shift is pressed" is turned on,
+the program ignores whether or not objects are selected and moves
+the folder only when the shift key is held down.
+
+
+
+[Drag - Full Window Drag]
+
+  With this option enabled, the entire window will be moved and
+redrawn when you drag the window with the title bar or with mouse
+button 2 instead of using a "drag frame".  ESC cannot be used to
+recover the previous position in this case.  Note that slower
+machines and machines with slow video cards will not be able to
+redraw the screen frequently.  Also, this function works only with
+PM windows.
+
+
+
+[Pointer 1 - Move Pointer to Focus]
+
+  When this item is enabled, the mouse pointer will automatically
+move to the window which gets the focus.  If "Always Move Pointer"
+is on, the pointer will be moved every time the focus window
+changes.  If it is off, the pointer will move in the following
+cases:
+
+  1. A dialog box or message box is created.
+  2. The focus is changed by a double-click (i.e. opening a window).
+
+  To prevent the pointer from moving, move the mouse quickly during
+automatic mouse move.
+
+  The "Step" field determines how quickly the pointer moves to the
+new window.  One step equals 20 milliseconds.  "Randomness" defines
+the randomness of the pointer movement.  A randomness of 0 means that
+the pointer moves directly to the new focus window.  Higher numbers
+are increasingly random.
+
+  If "Ignore Buttonless Dialogs" is checked, the pointer will not be
+moved to a focus window that has no buttons.
+
+  If "Ignore LaunchPad" is checked, the program ignores the LaunchPad
+and its drawers.
+
+  It is a good idea to use Comet Cursor with this function.
+
+
+
+[Pointer 1 - Wrap Pointer on Screen Border]
+
+  When this option is checked the pointer will "wrap" from one side
+of the screen to the opposite side.  "Effective Area" determines how
+big the area is on each screen border where jumping will occur,
+starting from the center of the screen border.  50% means that the
+area from the center halfway to each corner will be effective, 75%
+means the area from the center of the border three fourths of the
+way to the corners will be effective, etc.
+
+
+
+[Pointer 2 - Activate Window at Pointer]
+
+  This feature automatically sets focus to the window underneath the
+mouse pointer.  It is disabled when popup menus are displayed or
+when a mouse button is pressed, and ignores Win-OS/2 seamless
+windows or PMX windows.
+
+  If the Window List is shown, this feature is suspended until the
+mouse pointer moves over the Window List.
+
+  "Waiting Time" determines how long the delay is before the window
+underneath the mouse pointer is activated.  If 0, the window is
+activated instantly.  A value of 50-60 is suggested to avoid
+activating windows accidentally.
+
+  If "Keep Window Z-Orders" is checked, the window will not bring
+the new focus window in front of all other windows.
+
+  If "Ignore Desktop" is checked, the Desktop will not get the focus
+when the mouse is over it.
+
+  A newly created window will soon lose its focus if the mouse pointer
+is not moved to it.  Losing the focus can be a problem for
+"Bubble Help" and similar cases.  "Only when Pointer is moved"
+prevents newly created windows from losing focus if the user doesn't
+move the mouse pointer.  If "Move pointer to Focus" is enabled, this
+option is not effective.
+
+
+
+[Pointer 2 - Automatic Menu Selection]
+
+  When this option is checked, the menu item at the mouse pointer is
+shown as if the mouse button is pressed.  You must still click the
+mouse button to select the menu item.  Conditional cascade menus are
+shown only when the pointer moves over the right half of the menu
+item, and in that case the submenu is automatically opened.
+This feature makes menu navigation faster and more accurate.
+
+
+
+[Screen View - Screen Drawing]
+
+  This allows you to draw lines anywhere on the screen by using the
+specific key-mouse combination.  To change the combination to draw
+lines, click the words under the checkbox of this function that
+show the current combination with the combination to be assigned.
+Valid keys are Shift, Ctrl, and Alt.  You must press at least one of
+these keys.  The default combination is Shift + Ctrl + Button 1.
+
+  Change the color by selecting a color from the value set.  Clicking
+"Refresh Screen" erases all lines.
+
+
+
+[Screen View - Window Shadows on Desktop]
+
+  This option causes windows to cast shadows on the desktop.
+"Shadow x" and "Shadow y" determine the size of the shadows.
+"Shadow Darkness" determines the density of the shadow.  0 is the
+lightest, and 8 is the darkest.  Press "Refresh Screen" to update
+the screen after making changes to these parameters.
+
+  A vertical black line will show on the screen on systems with some
+video cards, such as S3 864/964 or Matrox video card, because their
+video drivers seem to have a bug in the API GpiBox.  If you experience
+problems with this setting, check "Adaptation to Video Driver Bugs" to
+avoid it.
+
+
+
+[Screen View - Random Icons]
+
+  NOTE - This function will not work on Warp.
+
+  This function changes the icon for standard files.  Icons in
+NPSWPSRI.DLL are randomly selected for each standard file.
+To customize icons, modify NPSWPSRI.RC to include your icons.
+The format is:
+
+  ICON n PRELOAD IMPURE "filename"
+
+n must be 2 or greater, and sequential.  Then enter the following
+command in an OS/2 command window:
+
+  rc npswpsri.rc npswpsri.dll
+
+This will enable the new random icons.
+
+  Do not change NPSWPSRI.DLL's icon from its settings notebook.  NPS
+WPS Enhancer expects NPSWPSRI.DLL to have a standard icon.
+
+
+
+[Animation - Window Animation for Open / Close]
+
+  This feature improves the animations used when a window is opened
+or closed.  There are 5 different types of animations available.
+Win-OS/2 seamless windows are not animated.
+
+  DLLs for window animations are loaded when the program starts
+according to the file NPSWPS.LST.  The fifth and sixth strings in
+each line of NPSWPS.LST, which stand for the words to be displayed
+in the dialog box, can be modified by the user.  Lines which start
+with a semicolon are comments and are ignored by the program.
+
+  The option "Number of Afterimages" sets the number of frames
+displayed at the same time.  In general, this value should be set
+higher for faster machines and higher resolutions.
+
+  If "Animation Sounds" is checked, a sound file will be played
+according to the Sound settings notebook.  The names of wave files
+are read only when NPS WPS Enhancer starts, so when you change the wave
+files, restart the program.
+
+  "Waveaudio Index" determines which sound card is used for the
+animation sounds.  Index 1 means Waveaudio01, 2 means Waveaudio02,
+etc.
+
+  If "Animations for All Frame Windows" is checked, all frame
+windows are animated, not just those with the animation attribute.
+
+  Click "Detail Settings..." to configure each animation type and
+whether or not it is enabled.  Select the animation name to customize
+each animation type.
+
+  If more than one animation type is enabled, the animation is randomly
+selected every time a window animates.
+
+  "Step" sets the number of steps in the animation.  A higher number
+means more steps, and the animation will take longer.  Take care when
+setting this number on slow machines - a high Step value may take a
+very long time to draw.
+
+  If "Thick Line" is checked, the animation will be drawn by a thicker
+line than usual.
+
+  You can test the current setting with the "Test" button.
+
+  "Angle" determines how many degrees of rotation the animation will
+rotate through.  "Divisor" determines how many rectangles will be
+used.  On a 486DX2/66Mhz, numbers above 4 are too slow unless the
+Step is less than 25.
+
+  If you can write a dynamic link library, please try to make your own
+window animations.  NPSWPSWA.DOC contains instructions.  NPSWPSWA.CPP
+is the source code for NPSWPSWA.DLL, the standard window animation
+module for NPS WPS Enhancer.
+
+  The new animation package NPSWA01.ZIP is available on some ftp
+sites. (ex. ftp://hobbes.nmsu.edu/os2/wpsutil/npswa01.zip)
+or my home page (http://www.airnet.or.jp/~ts).
+
+NPSWPSWA.DLL is also included in NPSWA01.ZIP, but it is older.
+
+
+[Command Window - Popup Menu]
+
+  NOTE - The file dialog called from this option is different from
+         the one in version 1.73a.
+
+  When enabled this option opens a popup menu for OS/2 and DOS
+command windows when mouse button 2 is pressed anywhere in the
+window.  If the menu item "Filename..." is selected from this menu
+a File dialog will appear.
+
+  The file dialog brought up by this menu item allows you to
+directly open files by selecting them and then pressing the "Open"
+button.  The "Names" button in the file dialog allows you to copy
+the filenames to the clipboard.  The filenames are separated by
+white space, and filenames which contain white space are enclosed by
+double quotation marks.  To open a folder you must specify the name
+of the folder, because folders are not listed in the listbox.
+
+
+
+[Command Window - Extended Marking]
+
+  This option allows you to enter mark mode in OS/2 and DOS windows
+by dragging the specified mouse button within the window.
+The selected text is automatically copied to the clipboard when the
+mouse button is released.  The last carriage return of the copied
+text is removed.
+  To change the key-mouse combination for extended marking, click the
+words under the checkbox of this function, which show the current
+combination, with the new combination to be assigned.  Valid keys are
+Shift, Ctrl, and Alt. The default combination is Button 1 without
+a key.
+
+
+
+[Command Window - Quick Paste]
+
+  This option causes clipboard text to be pasted to an OS/2 or DOS
+command window when the specified key-mouse combination is clicked
+on it.
+  To change the combination for quick paste, click the words under
+the checkbox of this function, which show the current combination,
+with the new combination to be assigned.  Valid keys are Shift,
+Ctrl, and Alt, and a click and a double click are treated as
+different actions.  The default combination is Button 1 double
+click without a key.
+
+
+
+[Others - Key Translation]
+
+  The program will translate keys.  To my regret, this function is
+not perfect; some applications ignore translated keys.
+  The file NPSWPS.DAT describes the key translations.  This file is
+read only when NPS WPS Enhancer starts.  The format of the key
+translation table is:
+
+[C+|C-][S+|S-][A+|A-]key [C+|C-][S+|S-][A+|A-]key
+
+The first string is the input, and the second string is the output.
+Case is ignored.  '[]' means that the contents are optional.  '|'
+means you may specify only one of the two options.  'C', 'S', and
+'A' are Ctrl, Shift, and Alt.  '+' means the key is pressed, '-'
+means it is released.  'key' is either a character or a virtual key
+name.
+  Lines which start with ';' are comments.  If you want to
+translate semicolons, specify either "S+;" or "S-;" according to
+your keyboard.
+
+
+Example:
+
+c+x s+c-delete
+
+The input is Ctrl + 'X'.  Shift and Alt are ignored because there is
+no S+, S-, A+, or A-.  The output is Shift + DEL.  The Ctrl state
+will be changed to off.  The Alt state will not be changed.
+
+
+Virtual Keys:
+
+BREAK (Alt + Pause)
+BACKSPACE
+TAB
+BACKTAB (Shift + Tab)
+NEWLINE (Enter or Return)
+PAUSE
+ESC
+SPACE
+PAGEUP
+PAGEDOWN
+END
+HOME
+LEFT
+UP
+RIGHT
+DOWN
+PRINTSCRN
+INSERT
+DELETE
+SCRLLOCK
+ENTER (This is numeric-keypad Enter or shift + Enter)
+SYSRQ
+F1, F2, ..., F24
+
+
+
+[Keyboard Macro]
+
+  There are 3 special virtual key names listed below.
+
+STARTRECORD
+ENDRECORD
+PLAYBACK
+
+The key STARTRECORD will start recording keyboard input.  The key
+ENDRECORD will stop memorizing, and the key PLAYBACK sends the
+memorized keyboard input to the window.  In the default NPSWPS.DAT,
+Ctrl + '8' is assigned to STARTRECORD, Ctrl + '9' is assigned to
+ENDRECORD, and Ctrl + '0' is assigned to PLAYBACK.
+
+
+
+[Command Execution]
+
+  Version 1.82 introduces another new key name: CMD.  The key that
+is bound to CMD will execute a program as if it were typed on a command
+line window.  Be sure that the environment variable COMSPEC in your
+CONFIG.SYS points to the proper shell program.
+
+Example:
+
+c+7 cmd start npswps
+
+With this setting, Ctrl + 7 will activate NPS WPS Enhancer to show its
+window. This is exactly the same as typing "start npswps" on
+a command line window. (PATH for NPSWPS.EXE's directory is required.)
+
+
+[Others - Window List]
+
+  This option shows the Window List when both mouse buttons are
+pressed over most windows, not just when over the Desktop.
+
+
+
+[Others - Close Buttons]
+
+  This option adds a Close button to the title bar of the window
+which closes the window when pressed.  Because Close buttons for system
+windows, such as OS/2 windows, are made in the NPS WPS Enhancer
+thread, Close buttons are sometimes drawn before the title bar
+redraws.  I don't think it's a severe problem.
+
+  NPSWPSCB.BMP is the bitmap file for close buttons.  This file must be
+placed in the directory where NPSWPS.EXE is installed.  To customize
+Close buttons, please modify NPSWPSCB.BMP and restart NPS WPS Enhancer.
+  The bitmap for Close buttons was included in NPSWPS.DLL as a resource
+in NPS WPS Enhancer version 1.80 and before, so a resource compiler was
+necessary.
+
+  Close buttons are not properly drawn on systems with some video
+cards, such as a Power9000 video card, because its video driver seems
+to have a bug in the API named GpiDrawBits.  If you experience problems
+with this setting, check "Adaptation to Video Driver Bugs" to avoid it.
+The bitmap is streched by 1 pixel in its height (y size) in this case.
+
+  Please press the "Refresh Screen" button in the "Screen View" page
+when you change this bug adaptation option.
+
+
+
+[Others - Extended File Dialogs]
+
+  This option lets you drag the files selected in the listbox of the
+standard file dialog of any application.  The dragged files can be
+moved by dropping them on a folder or deleted by dropping them on
+the shredder.
+
+  In addition, the menu item "Filename..." is added to the popup
+menu of the Desktop.  This is the same file dialog described in
+"Command Window - Popup Menu".
+
+
+
+[Others - Smooth Scroll of Folders]
+
+  When this option is enabled, the scroll bars of a folder scroll
+the contents smoothly.  If the folder has a background bitmap, it
+will redraw the background each time the scrollbar is moved, causing
+the folder to flicker.
+
+
+
+[Others - Change Window Z-Order]
+
+  This option allows you to change the window z-order with the
+specified key-mouse combination.  "Up:" is the combination used to
+bring the window up by 1 level z-order, and "Down:" is the
+combination used to move the window down 1 level z-order.  To change
+these combinations, click these statements with the combination to
+be assigned.
+
+
+
+[Others - Entry Field Menu]
+
+  When enabled this option opens a popup menu for Entry Fields
+when mouse button 2 is pressed.  The menu items are copy, cut,
+and paste.  These 3 items mean Ctrl + Ins, Shift + Del, and
+Shift + Ins respectively.
+
+
+
+[Customize messages]
+
+  You can customize all the words used in NPS WPS Enhancer very
+easily.  Modify the strings with double quotation marks in
+NPSWPSUS.RC, and enter the following command in an OS/2 window:
+
+  rc npswpsus.rc npswps.dll
+
+  I'll be glad if you would kindly send the resource file written in
+any new languages. I can add such resource files to new versions of
+NPS WPS Enhancer. Please encode the resource file with UUENCODE when you
+send it to me, because your language will use codes which are treated as
+Japanese characters on my system.
+
+
+[Known problems]
+
+  First of all, if you notice your system sometimes hangs up or
+freezes, please disable all the options.  If the problem disappears
+in that case, probably only one option is the cause of your problem.
+Enable options one at a time until you find the problem option.
+
+  On some systems, activating NPS WPS Enhancer on system boot causes
+the Workplace Shell to freeze.  Please move the program object of NPS
+WPS Enhancer out of the Startup folder to another folder in this case.
+This problem doesn't occur on OS/2 2.x, and doesn't occur after
+Workplace Shell completes its initialization.  So I think it might be
+caused by Warp itself.
+
+  If the option "Activate Window at Pointer" is on and the option
+"Waiting Time" is set to 0, too frequent opening and closing of
+seamless WIN-OS/2 windows sometimes hangs the system. If this
+problem occurs, please set the waiting time to a non-0 value.
+
+  On some systems, The option "Arrange Icons on Matrix" prevents
+MVDM from executing.  It is a very rare problem, so I cannot find
+the reason.
+
+  Some users have reported that "Arrange Icons on Matrix" also makes
+the title bar font change to the system default font.
+
+  Folders cannot save their position if opened again before the
+window animation for closing is finished.
+
+  If "Close Buttons" is checked, MINSTALL.EXE (the MMPM/2 install
+program), cannot display its window on some systems.
+
+  Some users have reported that this option also causes some OS/2
+Full Screen applications to hang.
+
+  Andrew Zabolotny's freeware LxLite can compress the EXE and the DLLs
+in this package, but the compressed NPSWPS.DLL might cause a problem
+when you use IBM C++ debugger.
+
+
+
+[Distribution]
+
+  You can distribute this software without my permission as long as
+all the files are in the same package such as a .ZIP, .LZH, floppy
+disk, or CD-ROM directory.
+  Only language translation is allowed to modify files.  In that case,
+you must add the sentences that mention when and who modified the
+package at the head of README.
+
+
+
+[Other]
+
+  NPS WPS Enhancer was created by TAKASUGI Shinji (surname
+first - now I follow the Japanese way even when I use English).
+This English manual was written by me and modified by Tom Wheeler
+(twh270@airmail.net).
+
+  Please send me email if you like this software.  Your ideas to
+improve Workplace Shell are also welcome.  About 10 functions of
+this program are from the ideas of users.
+
+  I apologize that I have not replied to all the mails I have
+received, but I have read all of them.  These mails really encourage
+me to release free softwares.
+
+  Thanks a lot for sending foreign language versions.  I picked out
+the file of the first person that sent them to me.
+
+
+                        TAKASUGI Shinji
+                        (member of Team OS/2 Japan)
+                        ts@airnet.or.jp, jbd03575@niftyserve.or.jp
+			http://www.airnet.or.jp/~ts

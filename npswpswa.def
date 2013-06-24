@@ -1,0 +1,8 @@
+LIBRARY NPSWPSWA
+DESCRIPTION 'Window Animation DLL for NPS WPS Enhancer version 1.81 (C)1995 N.P.S.'
+DATA READWRITE
+EXPORTS SpinFrame		@1
+	VortexFrames		@2
+	ScatterGatherFrames	@3
+	SpikeFrames		@4
+	FireworksFrames		@5

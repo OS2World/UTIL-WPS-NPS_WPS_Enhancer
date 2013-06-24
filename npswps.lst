@@ -1,0 +1,13 @@
+;DLL-Name DLL-Ordinal "Animation Name" "Parameter Name" "Displayed Animation Name" "Displayed Parameter Name" Default-Step Default-Parameter Minimum-Parameter Maximum-Parameter
+
+;"Animation Name" and "Parameter Name" should be the English words for
+;the worldwide compatibility.
+
+;"Displayed Animation Name" and "Displayed Parameter Name" can be modified
+;by the user.
+
+npswpswa.dll 1 "Spin Frame" "Angle" "Spin Frame" "Angle (deg.):" 400 -200 -999 999
+npswpswa.dll 2 "Vortex Frames" "Angle" "Vortex Frames" "Angle (deg.):" 170 200 -999 999
+npswpswa.dll 3 "Scatter / Gather Frames" "Divisor" "Scatter / Gather Frames" "Divisor:" 40 4 1 10
+npswpswa.dll 4 "Spike Frames" "Angle" "Spike Frames" "Angle (deg.):" 60 360 -999 999
+npswpswa.dll 5 "Fireworks Frames" "Angle" "Fireworks Frames" "Angle (deg.):" 80 300 -999 999
